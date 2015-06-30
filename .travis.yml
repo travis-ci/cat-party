@@ -4,10 +4,26 @@ install: echo "party time"
 
 script: echo "like it's cat meow 99"
 
+before_deploy:
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip
+
 deploy:
-  provider: codedeploy
-  access_key_id: $AWS_KEY
-  secret_access_key: $AWS_SECRET
-  application: CatParty
-  deployment_group: Production
-  revision_type: github
+  - provider: s3
+    access_key_id: AKIAJ4XZHIMNKP3WGGHQ
+    secret_access_key: &1
+      secure: F3pFbaxwO+/wSVoulVNzG7YoUxYIoAN2voWuTMQr0L7of2DkjJx73xguPL4l+DnpQhtPEFCk7Fn+taF7FjtQuYBVXQkuM+9aaPW2PU+fvxLYck598dSCKJuKuMGJzK9njlg6tfZdeDrPm+hep+xN4NRXO3iBIKEP18sljjpk8d6Q5DtpTUacAzfErkadvbYYV3lb58QWFCNEEY8/t6rEnol0xJw3iF+mAjeqRXL6f9sHY41aGspF98ec5xJZGUdIsxGaA5cCCekSpWdxz2wyOIZqoZvHVNhhP+VG5kDRgVdiBBRQSJ+iA7bEkZaMfl04Jre4uOYSnx1Xy/041lgtW8HUieGfYUZYgjtDhHjloT3KvY6RXmfGkkGDwuYxMDPCmW3TVIsZeAsEjXK+vrxlYlzKz12uB5TqFm1ukNzQHx/Ik/PzNa8FYW+Jrn1gOKw2zj9XNKnZyvr7thlwIspEXZP7KW3+RMgwSCgA6kDJh4FauG+YMyjZ9tCF0Wsst3TeeDTVR9b/sK8CRGeG74dv4T3KvHNrQc6b6vMOY6ZoCmlkSyTLArY7ZJNVBkYV6V5lOngqI0Bzot6VLoFg/PwL0j+74Dbqv5FavwnDrMY2rsqlyqyT3aBVS9dZ9nptcsTQSkU/ekWSTuBxwrWs3ouPotdysRgL4NeZJRmkIDhyM3E=
+    local_dir: dpl_cd_upload
+    skip_cleanup: true
+    on: &2
+      repo: travis-ci/cat-party
+    bucket: catparty-codedeploy
+  - provider: codedeploy
+    access_key_id: AKIAJ4XZHIMNKP3WGGHQ
+    secret_access_key: *1
+    bucket: catparty-codedeploy
+    key: latest.zip
+    bundle_type: zip
+    application: CatParty
+    deployment_group: Production
+    on: *2
