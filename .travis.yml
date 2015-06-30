@@ -1,0 +1,13 @@
+language: ruby
+
+install: echo "party time"
+
+script: echo "like it's cat meow 99"
+
+deploy:
+  provider: codedeploy
+  access_key_id: $AWS_KEY
+  secret_access_key: $AWS_SECRET
+  application: CatParty
+  deployment_group: Production
+  revision_type: github
