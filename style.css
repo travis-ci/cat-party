@@ -1,0 +1,43 @@
+body {
+  background-color: #F3F3F3;
+  font: 20px/25px 'inconsolata';
+  margin: 15px;
+}
+
+h1 {
+  font-size: 135px;
+  line-height: 175px;
+  margin: 0;
+}
+
+section{
+  padding-top: 20px;
+  height: 400px;
+}
+
+.cat {
+  width: 45%;
+  display: inline;
+}
+
+img {
+  width: 45%;
+  vertical-align: top;
+}
+
+footer {
+  max-width: 500px;
+  margin: 40px auto 0 auto;
+  height: 145px;
+}
+
+p{
+  position: absolute;
+  margin-top: 105px;
+  margin-left: 250px;
+}
+
+a {
+  text-decoration:none;
+  color: #066;
+}
