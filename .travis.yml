@@ -25,6 +25,6 @@ deploy:
     bucket: catparty-codedeploy
     key: latest.zip
     bundle_type: zip
-    application: CatParty
-    deployment_group: Production
+    application: CatPartyDemoApplication
+    deployment_group: ProductionDemoFleet
     on: *2
